@@ -9,7 +9,7 @@ const rawResults = document.querySelector("#rawResults");
 function find() {
   let user = gh.value.toLowerCase();
   if (user != "") {
-    statusUpdate(`Fetching devstat score for '${user}'`, "info");
+    statusUpdate(`Fetching devstats score for '${user}'`, "info");
     rawResultsWrapper.classList.add('hidden');
     fetch("https://devstats.cncf.io/api/v1", {
       method: "POST",
@@ -26,15 +26,15 @@ function find() {
       statusUpdate("", "info");
       let score = data.number[0];
       if (score) {
-        result.innerHTML = score; 
+        result.innerHTML = score;
         rawResults.innerText = JSON.stringify(data, "", 2)
         rawResultsWrapper.classList.remove('hidden');
       } else {
-        statusUpdate(`Failed to get devstat score for '${user}'`, "error");
+        statusUpdate(`Failed to get devstats score for '${user}'`, "error");
       }
     })
     .catch(err => {
-      statusUpdate(`Failed to get devstat score for '${user}'`, "error");
+      statusUpdate(`Failed to get devstats score for '${user}'`, "error");
       console.log(err);
     });
   }
