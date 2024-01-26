@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 
-    <title>Devstats!</title>
+    <title>DevStats!</title>
 
     <link rel="stylesheet" href="/style.css" />
     <script src="/script.js" defer></script>
@@ -12,19 +12,19 @@
   <body>
     <div class="wrapper">
       <div class="content" role="main">
-        <h1 class="title">Devstats!</h1>
-        
+        <h1 class="title">DevStats!</h1>
+
         <p>
-          Enter your GitHub username to find your CNCF devstats score.
+          Enter your GitHub username to find your <a href="https://cncf.io/">CNCF</a> devstats score.
         </p>
-        
+
         <div>
           <label>GitHub Username: <input name="github" id="github" autocomplete="off" data-lpignore="true" /></label>
           <button id="find">Find</button>
         </div>
-        
+
         <div id="status"></div>
-        
+
         <div id="result"></div>
         <details id="rawResultsWrapper" class="hidden">
           <summary>Raw results</summary>
@@ -34,7 +34,13 @@
     </div>
 
     <footer class="footer">
-      Made with 💙 by <a href="https://marcusnoble.com">Marcus Noble</a>
+      <p>
+        Made with 💙 by <a href="https://marcusnoble.com">Marcus Noble</a> and with thanks to the <a href="https://github.com/cncf/devstatscode">DevStats code</a> authors
+      </p>
+      <p>
+        Source available at:<br/>
+        <a href="https://github.com/AverageMarcus/devstats-viewer" target="_blank">https://github.com/AverageMarcus/devstats-viewer</a>
+      </p>
     </footer>
   </body>
 </html>

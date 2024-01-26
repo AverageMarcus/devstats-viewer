@@ -43,6 +43,10 @@ body {
   color: var(--color-text-main);
 }
 
+a {
+  color: var(--color-primary);
+}
+
 /* Page structure */
 .wrapper {
   min-height: var(--wrapper-height);
