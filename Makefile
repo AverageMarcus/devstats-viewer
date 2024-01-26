@@ -20,6 +20,10 @@ docker-publish:
 release:
 	kubectl --namespace devstats-viewer set image deployment devstats-viewer web=rg.fr-par.scw.cloud/averagemarcus/devstats-viewer:$(SHA)
 
+.PHONY: run # Run the web server (relies on npx being available)
+run:
+	npx http-server ./src
+
 .PHONY: help # Show this list of commands
 help:
 	@echo "kube-image-prefetch"
