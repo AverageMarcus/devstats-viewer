@@ -6,6 +6,16 @@ const status = document.querySelector("#status");
 const rawResultsWrapper = document.querySelector("#rawResultsWrapper");
 const rawResults = document.querySelector("#rawResults");
 
+// Parse URL query parameters
+const urlParams = new URLSearchParams(window.location.search);
+const user = urlParams.get('user');
+
+// Fill form with user parameter
+if (user) {
+  gh.value = user;
+  find(); // Call the find function automatically
+}
+
 function find() {
   let user = gh.value.toLowerCase();
   if (user != "") {
@@ -37,6 +47,12 @@ function find() {
       statusUpdate(`Failed to get devstats score for '${user}'`, "error");
       console.log(err);
     });
+
+    // Change the URL
+    let url = new URL(window.location.href);
+    let params = new URLSearchParams(url.search);
+    params.set('user', user);
+    window.history.replaceState({}, '', `${url.pathname}?${params}`);
   }
 }
 
