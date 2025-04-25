@@ -17,7 +17,7 @@ if (user) {
 }
 
 function find() {
-  let user = gh.value.toLowerCase();
+  let user = gh.value.trim().toLowerCase();
   if (user != "") {
     statusUpdate(`Fetching devstats score for '${user}'`, "info");
     rawResultsWrapper.classList.add('hidden');
