@@ -29,7 +29,7 @@ function find() {
         "Content-Type": "application/json",
       },
       redirect: "follow",
-      body: "{\"api\":\"DevActCnt\",\"payload\":{\"project\":\"all\",\"range\":\"Last decade\",\"metric\":\"Contributions\",\"repository_group\":\"All\",\"country\":\"All\",\"github_id\":\"" + user + "\",\"bg\":\"\"}}",
+      body: "{\"api\":\"DevActCnt\",\"payload\":{\"project\":\"all\",\"range\":\"Last century\",\"metric\":\"Contributions\",\"repository_group\":\"All\",\"country\":\"All\",\"github_id\":\"" + user + "\",\"bg\":\"\"}}",
     })
     .then(res => res.json())
     .then(data => {
