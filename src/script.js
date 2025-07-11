@@ -29,12 +29,12 @@ function find() {
         "Content-Type": "application/json",
       },
       redirect: "follow",
-      body: "{\"api\":\"DevActCnt\",\"payload\":{\"project\":\"all\",\"range\":\"Last century\",\"metric\":\"Contributions\",\"repository_group\":\"All\",\"country\":\"All\",\"github_id\":\"" + user + "\",\"bg\":\"\"}}",
+      body: "{\"api\":\"GithubIDContributions\",\"payload\":{\"github_id\":\"" + user + "\"}}",
     })
     .then(res => res.json())
     .then(data => {
       statusUpdate("", "info");
-      let score = data.number[0];
+      let score = data.contributions;
       if (score) {
         result.innerHTML = score;
         rawResults.innerText = JSON.stringify(data, "", 2)
