@@ -1,6 +1,7 @@
 const btn = document.querySelector("#find");
 const gh = document.querySelector("#github");
 const result = document.querySelector("#result");
+const subResult = document.querySelector("#subResult");
 const status = document.querySelector("#status");
 
 const rawResultsWrapper = document.querySelector("#rawResultsWrapper");
@@ -35,13 +36,13 @@ function find() {
     .then(data => {
       statusUpdate("", "info");
       let score = data.contributions;
-      if (score) {
-        result.innerHTML = score;
-        rawResults.innerText = JSON.stringify(data, "", 2)
-        rawResultsWrapper.classList.remove('hidden');
-      } else {
-        statusUpdate(`Failed to get devstats score for '${user}'`, "error");
+      if (!score) {
+        statusUpdate(`Failed to get devstats score for '${user}'.\nEither user doesn't exist or no contributions recorded.`, "error");
       }
+      result.innerHTML = score;
+      subResult.innerHTML = `Issues: ${data.issues} | PRs: ${data.prs}`;
+      rawResults.innerText = JSON.stringify(data, "", 2)
+      rawResultsWrapper.classList.remove('hidden');
     })
     .catch(err => {
       statusUpdate(`Failed to get devstats score for '${user}'`, "error");

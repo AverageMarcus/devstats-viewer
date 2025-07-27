@@ -99,6 +99,7 @@ input {
 #status {
   height: 22px;
   margin: 8px;
+  text-align: center;
 }
 
 #status.info {
@@ -114,11 +115,30 @@ input {
   font-style: normal;
   font-weight: bold;
   font-size: 70px;
-  margin: 0.5em;
+  margin: 0.2em;
   height: 100px;
 }
 
+#subResult {
+  font-family: HK Grotesk;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  margin: 0em;
+  height: 30px;
+}
+
 #rawResultsWrapper {
-  max-width: 90vw;
+  margin-top: 2em;
   overflow-x: scroll;
+  width: 100%;
+  text-align: center;
+}
+
+#rawResultsWrapper summary {
+  cursor: pointer;
+}
+
+#rawResultsWrapper pre {
+  text-align: left;
 }
