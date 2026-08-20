@@ -39,12 +39,19 @@ function find() {
       signal: inflight.signal,
       body: "{\"api\":\"GithubIDContributions\",\"payload\":{\"github_id\":\"" + user + "\"}}",
     })
-    .then(res => res.json())
+    .then(res => {
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      return res.json();
+    })
     .then(data => {
       statusUpdate("", "info");
       let score = data.contributions;
       if (!score) {
         statusUpdate(`Failed to get devstats score for '${user}'.\nEither user doesn't exist or no contributions recorded.`, "error");
+        result.innerHTML = "";
+        subResult.innerHTML = "";
+        rawResultsWrapper.classList.add('hidden');
+        return;
       }
       result.innerHTML = score;
       subResult.innerHTML = `Issues: ${data.issues} | PRs: ${data.prs}`;
