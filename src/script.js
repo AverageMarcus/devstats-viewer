@@ -7,6 +7,9 @@ const status = document.querySelector("#status");
 const rawResultsWrapper = document.querySelector("#rawResultsWrapper");
 const rawResults = document.querySelector("#rawResults");
 
+// Keep the current request so a newer search can cancel the older one
+let inflight = null;
+
 // Parse URL query parameters
 const urlParams = new URLSearchParams(window.location.search);
 const user = urlParams.get('user');
@@ -20,6 +23,9 @@ if (user) {
 function find() {
   let user = gh.value.trim().toLowerCase();
   if (user != "") {
+    // Cancel the previous request so an older slower response can't overwrite a newer one
+    if (inflight) inflight.abort();
+    inflight = new AbortController();
     statusUpdate(`Fetching devstats score for '${user}'`, "info");
     rawResultsWrapper.classList.add('hidden');
     fetch("https://devstats.cncf.io/api/v1", {
@@ -30,6 +36,7 @@ function find() {
         "Content-Type": "application/json",
       },
       redirect: "follow",
+      signal: inflight.signal,
       body: "{\"api\":\"GithubIDContributions\",\"payload\":{\"github_id\":\"" + user + "\"}}",
     })
     .then(res => res.json())
@@ -45,6 +52,7 @@ function find() {
       rawResultsWrapper.classList.remove('hidden');
     })
     .catch(err => {
+      if (err.name === "AbortError") return; // request was replaced by a newer one
       statusUpdate(`Failed to get devstats score for '${user}'`, "error");
       console.log(err);
     });
